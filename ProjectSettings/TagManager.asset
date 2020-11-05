@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Note
+  - EndLine
+  - Hit
+  - Rest
   layers:
   - Default
   - TransparentFX
