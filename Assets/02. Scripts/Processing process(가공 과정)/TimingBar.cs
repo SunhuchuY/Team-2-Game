@@ -13,7 +13,7 @@ public class TimingBar : MonoBehaviour
 
     private void OnEnable() { transform.position = Start_Position.position; }
 
-    private void Update() { transform.localPosition += Vector3.right * speed * Time.deltaTime; }
+    private void FixedUpdate() { transform.localPosition += Vector3.right * speed * Time.deltaTime; }
 
     private void OnTriggerEnter2D(Collider2D col)
     {
@@ -24,10 +24,12 @@ public class TimingBar : MonoBehaviour
     {
         if(col.tag == "Hit" && !Hit)
         {
-            Hit = false;
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 Hit = true;
+                Sc.soundManagers.List = Sound_List.temp_sound;
+                SoundPlay();
+                Sc.process_Game_Manager.Score_Text_Update();
             }
         }
         else if (col.tag == "Rest" && Rest)
@@ -45,22 +47,22 @@ public class TimingBar : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D col)
     {
-        if(col.tag == "Hit" && Hit)
-        {
-            Sc.soundManagers.List = Sound_List.temp_sound;
-            SoundPlay();
-            Sc.process_Game_Manager.Score_Text_Update();
-        }
 
         if (col.tag == "Rest" && Rest)
         {
+            Hit = false;
+            Rest = true;
+
+            print("a");
             Sc.soundManagers.List = Sound_List.temp_sound;
             Sc.process_Game_Manager.Score_Text_Update();
             SoundPlay();
         }
-
-        Hit = false;
-        Rest = true;
+        else
+        {
+            Hit = false;
+            Rest = true;
+        }
 
     }
 

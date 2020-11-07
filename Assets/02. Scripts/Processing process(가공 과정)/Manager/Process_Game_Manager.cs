@@ -4,12 +4,14 @@ using System.Dynamic;
 using System.Net.Http.Headers;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 public class Process_Game_Manager : MonoBehaviour
 {
     int LoopOfnum; public int Score; public Text LoopOfnum_text, Count_Text, Score_Text;
     public GameObject TimingBar_Ob;
     public GameObject rest, interval, Temp_Parent; // 쉼표, 음정, 이 둘을 보관할 임시 저장 부모 오브젝트
+    GameObject[] Temp = new GameObject[0];
 
     private void OnEnable() { StartCoroutine(Enable()); }
 
@@ -17,22 +19,27 @@ public class Process_Game_Manager : MonoBehaviour
     {
         TimingBar_Ob.SetActive(false);
 
-        LoopOfnum = Sc.process_Menu_Manager.rythem_Data.LoopOfNum;
-        Score = 0;
+        LoopOfnum = Sc.process_Menu_Manager.rythem_Data.LoopOfnum;
+        Score = -1;
         LoopOfnum_Text_Update();
+        Temp_Remove();
 
         yield return new WaitForSeconds(Sc.fadeInFadeOut.fade_time);
 
+        Temp = new GameObject[Sc.process_Menu_Manager.rythem_Data.Syllable.Length];
+
         for (int i = 0; i < Sc.process_Menu_Manager.rythem_Data.Syllable.Length; i++)
         {
-            if(Sc.process_Menu_Manager.rythem_Data.Syllable[i] == 1)
-            {
-                GameObject Temp = Instantiate(interval, Temp_Parent.transform);
+            GameObject to;
+
+            if(Sc.process_Menu_Manager.rythem_Data.Syllable[i] == 1) {
+                to = Instantiate(interval, Temp_Parent.transform);
             }
-            else
-            {
-                GameObject Temp = Instantiate(rest, Temp_Parent.transform);
+            else {
+                to = Instantiate(rest, Temp_Parent.transform);
             }
+
+            Temp[i] = to;
         }
 
         for (int i = 0; i < 3; i++) // 3초 카운트
@@ -49,7 +56,12 @@ public class Process_Game_Manager : MonoBehaviour
     {
         TimingBar_Ob.SetActive(false);
         LoopOfnum--;
-        if (LoopOfnum <= 0) { return; }
+        if (LoopOfnum <= 0) {
+            Sc.fadeInFadeOut.FadeFuntion();
+            Sc.Process_Game.SetActive(false);
+            Sc.process_Menu_Manager.Item_Meterial_Manager.SetActive(true);
+            return; 
+        }
 
         LoopOfnum_Text_Update();
         TimingBar_Ob.SetActive(true);
@@ -58,6 +70,14 @@ public class Process_Game_Manager : MonoBehaviour
     public void LoopOfnum_Text_Update() { LoopOfnum_text.text = "x " + LoopOfnum; }
 
     public void Score_Text_Update() { Score++; Score_Text.text = "score : " + Score; }
+
+    void Temp_Remove()
+    {
+        for (int i = 0; i < Temp.Length; i++)
+        {
+            Destroy(Temp[i]);
+        }
+    }
 
 
 }

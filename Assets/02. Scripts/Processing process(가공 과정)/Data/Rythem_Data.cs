@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Rythem_Data : MonoBehaviour
 {
-    public int LoopOfNum = 2;
+    public int LoopOfnum;
     public int[] Syllable;
+
 }
