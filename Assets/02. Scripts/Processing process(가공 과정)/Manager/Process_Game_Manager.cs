@@ -20,8 +20,9 @@ public class Process_Game_Manager : MonoBehaviour
         TimingBar_Ob.SetActive(false);
 
         LoopOfnum = Sc.process_Menu_Manager.rythem_Data.LoopOfnum;
-        Score = -1;
+        Score = 0;
         LoopOfnum_Text_Update();
+        Score_Text_Update(0);
         Temp_Remove();
 
         yield return new WaitForSeconds(Sc.fadeInFadeOut.fade_time);
@@ -69,7 +70,7 @@ public class Process_Game_Manager : MonoBehaviour
 
     public void LoopOfnum_Text_Update() { LoopOfnum_text.text = "x " + LoopOfnum; }
 
-    public void Score_Text_Update() { Score++; Score_Text.text = "score : " + Score; }
+    public void Score_Text_Update(int plus = 1) { Score += plus; Score_Text.text = "score : " + Score; }
 
     void Temp_Remove()
     {

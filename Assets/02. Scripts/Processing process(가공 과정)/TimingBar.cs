@@ -15,12 +15,9 @@ public class TimingBar : MonoBehaviour
 
     private void FixedUpdate() { transform.localPosition += Vector3.right * speed * Time.deltaTime; }
 
-    private void OnTriggerEnter2D(Collider2D col)
-    {
-        if (col.tag == "EndLine") { Sc.process_Game_Manager.isNext(); }
-    }
+    private void OnTriggerEnter2D(Collider2D col) { if (col.tag == "EndLine") Sc.process_Game_Manager.isNext(); }
 
-    private void OnTriggerStay2D(Collider2D col)
+    /*private void OnTriggerStay2D(Collider2D col)
     {
         if(col.tag == "Hit" && !Hit)
         {
@@ -52,8 +49,6 @@ public class TimingBar : MonoBehaviour
         {
             Hit = false;
             Rest = true;
-
-            print("a");
             Sc.soundManagers.List = Sound_List.temp_sound;
             Sc.process_Game_Manager.Score_Text_Update();
             SoundPlay();
@@ -69,5 +64,5 @@ public class TimingBar : MonoBehaviour
     void SoundPlay()
     {
         Sc.soundManagers.SoundPlay();
-    }
+    }*/
 }

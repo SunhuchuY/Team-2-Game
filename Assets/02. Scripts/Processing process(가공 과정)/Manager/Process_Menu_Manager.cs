@@ -28,6 +28,7 @@ public class Process_Menu_Manager : MonoBehaviour
     {
         Sc.fadeInFadeOut.FadeFuntion();
         Sc.Process_Menu.SetActive(false);
+        Item_Meterial_Manager.GetComponent<ItemToMeterialStartGame>().Setting();
         Item_Meterial_Manager.SetActive(true);
     }
 
@@ -35,7 +36,10 @@ public class Process_Menu_Manager : MonoBehaviour
     {
         rythem_Data = EventSystem.current.currentSelectedGameObject.GetComponent<Rythem_Data>();
         Sc.fadeInFadeOut.FadeFuntion();
-        Sc.process_Menu_Manager.Item_Meterial_Manager.SetActive(false);
+
+        Item_Meterial_Manager.SetActive(false);
+        Item_Meterial_Manager.GetComponent<ItemToMeterialStartGame>().Combination_Check();
+
         Sc.Process_Game.SetActive(true);
     }
 
