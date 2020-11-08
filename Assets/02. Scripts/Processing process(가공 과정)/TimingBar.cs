@@ -7,15 +7,26 @@ public class TimingBar : MonoBehaviour
     public float speed = 400;
     public Transform Start_Position;
 
-    Timing_State state;
-
-    bool Hit = false, Rest = true;
+    public Vector3 Move_vector;
 
     private void OnEnable() { transform.position = Start_Position.position; }
 
-    private void FixedUpdate() { transform.localPosition += Vector3.right * speed * Time.deltaTime; }
+    private void FixedUpdate() { transform.localPosition += Move_vector * speed * Time.deltaTime; }
 
-    private void OnTriggerEnter2D(Collider2D col) { if (col.tag == "EndLine") Sc.process_Game_Manager.isNext(); }
+    private void OnTriggerEnter2D(Collider2D col) {
+        if (col.tag == "EndLine")
+        {
+            if(Sc.Process_Game.activeSelf == true)
+            {
+                Sc.process_Game_Manager.isNext();
+            }
+            else
+            {
+                Sc.process_Menu_Manager.Item_Meterial_Manager.GetComponent<ItemToMeterialStartGame>().process_Combination_Game_Manager
+                    .isNext();
+            }
+        }
+    }
 
     /*private void OnTriggerStay2D(Collider2D col)
     {

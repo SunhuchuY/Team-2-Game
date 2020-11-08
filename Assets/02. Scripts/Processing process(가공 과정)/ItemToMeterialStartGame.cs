@@ -11,6 +11,8 @@ public class ItemToMeterialStartGame : MonoBehaviour
     int check;
 
     public GameObject Combination_Button;
+    public GameObject Process_Combination_Game_Ob;
+    public Process_Combination_Game_Manager process_Combination_Game_Manager;
 
     public GameObject Item_Contant;
     public GameObject Meterial_Contant;
@@ -105,5 +107,6 @@ public class ItemToMeterialStartGame : MonoBehaviour
     {
         Sc.fadeInFadeOut.FadeFuntion();
         Sc.process_Menu_Manager.Item_Meterial_Manager.SetActive(false);
+        Process_Combination_Game_Ob.SetActive(true);
     }
 }
