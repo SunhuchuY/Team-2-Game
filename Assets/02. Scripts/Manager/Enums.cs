@@ -46,3 +46,8 @@ public enum Item_Name_List
     Saphire_ring = 3
 };
 
+public enum RightAndLeft{
+    left,
+    right
+};
+

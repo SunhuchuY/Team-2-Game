@@ -68,11 +68,13 @@
     <Compile Include="Assets\02. Scripts\Manager\Enums.cs" />
     <Compile Include="Assets\02. Scripts\Manager\Sc.cs" />
     <Compile Include="Assets\02. Scripts\Manager\SoundManagers.cs" />
+    <Compile Include="Assets\02. Scripts\Processing process(가공 과정)\CombinationNote_ColCheck.cs" />
     <Compile Include="Assets\02. Scripts\Processing process(가공 과정)\Data\Combination_Game_Data.cs" />
     <Compile Include="Assets\02. Scripts\Processing process(가공 과정)\Data\Item_Data.cs" />
     <Compile Include="Assets\02. Scripts\Processing process(가공 과정)\Data\Rythem_Data.cs" />
     <Compile Include="Assets\02. Scripts\Processing process(가공 과정)\ItemToMerterialList.cs" />
     <Compile Include="Assets\02. Scripts\Processing process(가공 과정)\ItemToMeterialStartGame.cs" />
+    <Compile Include="Assets\02. Scripts\Processing process(가공 과정)\Manager\CombinationNote_Manager.cs" />
     <Compile Include="Assets\02. Scripts\Processing process(가공 과정)\Manager\Process_Combination_Game_Manager.cs" />
     <Compile Include="Assets\02. Scripts\Processing process(가공 과정)\Manager\Process_Game_Manager.cs" />
     <Compile Include="Assets\02. Scripts\Processing process(가공 과정)\Manager\Process_Menu_Manager.cs" />

@@ -12,7 +12,6 @@ public class ItemToMeterialStartGame : MonoBehaviour
 
     public GameObject Combination_Button;
     public GameObject Process_Combination_Game_Ob;
-    public Process_Combination_Game_Manager process_Combination_Game_Manager;
 
     public GameObject Item_Contant;
     public GameObject Meterial_Contant;

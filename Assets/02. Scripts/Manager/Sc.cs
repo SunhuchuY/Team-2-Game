@@ -19,6 +19,8 @@ public class Sc : MonoBehaviour
     static public SoundManagers soundManagers;
     public Enums p_enums;
     static public Enums enums;
+    public Process_Combination_Game_Manager p_process_Combination_Game_Manager;
+    static public Process_Combination_Game_Manager process_Combination_Game_Manager;
 
     private void Awake()
     {
@@ -30,5 +32,6 @@ public class Sc : MonoBehaviour
         process_Menu_Manager = p_process_Menu_Manager;
         soundManagers = p_soundManagers;
         enums = p_enums;
+        process_Combination_Game_Manager = p_process_Combination_Game_Manager;
     }
 }

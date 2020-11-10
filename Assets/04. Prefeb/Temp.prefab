@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5865721986131981247}
   - component: {fileID: 5865721986131981244}
+  - component: {fileID: 6134544980252650244}
   m_Layer: 5
   m_Name: Temp
   m_TagString: Untagged
@@ -61,3 +62,19 @@ MonoBehaviour:
   m_ChildControlHeight: 0
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
+--- !u!114 &6134544980252650244
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5865721986131981246}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01afc4f7d3d9b5c49ab876aa280fd372, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Check_Button: {fileID: 0}
+  isButton: 0
+  type: 0
+  you: {fileID: 0}

@@ -22,8 +22,7 @@ public class TimingBar : MonoBehaviour
             }
             else
             {
-                Sc.process_Menu_Manager.Item_Meterial_Manager.GetComponent<ItemToMeterialStartGame>().process_Combination_Game_Manager
-                    .isNext();
+                Sc.process_Combination_Game_Manager.isNext();
             }
         }
     }
