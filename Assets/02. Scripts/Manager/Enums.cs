@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,6 +10,10 @@ public class Enums : MonoBehaviour
 
     static public int Item_Len = Enum.GetNames(typeof(Item_Name_List)).Length;
     static public int Meterial_Len = Enum.GetNames(typeof(Item_Meterial_List)).Length;
+
+    // 아이템 enum에 명시 된 순서대로 저장한다(위의 스트링값도 아이템 enum순서이니까 참조가능)
+    public int[] Item_countSort = new int[Item_Len];
+    public Sprite[] Item_Image_Ob = new Sprite[Item_Len];
 }
 
 enum Timing_State

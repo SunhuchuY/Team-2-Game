@@ -43,4 +43,11 @@ public class Process_Menu_Manager : MonoBehaviour
         Sc.Process_Game.SetActive(true);
     }
 
+    public void Back_Screen_Button()
+    {
+        Sc.fadeInFadeOut.FadeFuntion();
+        Sc.Process_Menu.SetActive(false);
+        Sc.Operation_Menu.SetActive(true);
+    }
+
 }

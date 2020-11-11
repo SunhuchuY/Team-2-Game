@@ -4,10 +4,15 @@ using UnityEngine;
 
 public class Sc : MonoBehaviour
 {
+    public GameObject p_Operation_Menu;
+    static public GameObject Operation_Menu;
+
     public GameObject p_Process_Menu;
     static public GameObject Process_Menu;
     public GameObject p_Process_Game;
     static public GameObject Process_Game;
+    public GameObject p_Process_Combination_Game_Ob;
+    static public GameObject Process_Combination_Game_Ob;
 
     public FadeInFadeOut p_fadeInFadeOut;
     static public FadeInFadeOut fadeInFadeOut;
@@ -26,6 +31,8 @@ public class Sc : MonoBehaviour
     {
         Process_Menu = p_Process_Menu;
         Process_Game = p_Process_Game;
+        Operation_Menu = p_Operation_Menu;
+        Process_Combination_Game_Ob = p_Process_Combination_Game_Ob;
 
         fadeInFadeOut = p_fadeInFadeOut;
         process_Game_Manager = p_process_Game_Manager;

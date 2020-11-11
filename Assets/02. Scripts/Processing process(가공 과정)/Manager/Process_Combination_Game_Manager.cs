@@ -23,7 +23,7 @@ public class Process_Combination_Game_Manager : MonoBehaviour
     private void OnEnable()
     {
         // 오브젝트 전부 삭제
-        data.RemoveRange(0, data.Count);
+        ListRemove_ToObject();
 
         for (int i = 0; i < Enums.Meterial_Len; i++)
         {
@@ -53,6 +53,7 @@ public class Process_Combination_Game_Manager : MonoBehaviour
 
         string use_Item_dataName = Sc.enums.Item_name_string[(int)Sc.process_Menu_Manager.Item_Data.Item_Name];
         inIndex = 0; outIndex = 0; Score = 0;
+        Score_Text_Update();
 
         for (int i = 0; i < combination_Game_Data.Combination_Data.Length; i++)
         {
@@ -70,9 +71,19 @@ public class Process_Combination_Game_Manager : MonoBehaviour
     {
         if (combination_Game_Data.Combination_Data[pickIndex].Line[outIndex].LoopOfnum <= ++inIndex)
         {
-            outIndex++;
-            inIndex = 0;
-            StartCoroutine(Line_Start());
+            if (++outIndex == combination_Game_Data.Combination_Data[pickIndex].Line.Length)
+            {
+                Sc.fadeInFadeOut.FadeFuntion();
+                Sc.Process_Combination_Game_Ob.SetActive(false);
+                Sc.Operation_Menu.SetActive(true);
+                Sc.enums.Item_countSort[(int)Sc.process_Menu_Manager.Item_Data.Item_Name]++;
+                return;
+            }
+            else
+            {
+                inIndex = 0;
+                StartCoroutine(Line_Start());
+            }
         }
         else
         {
@@ -149,5 +160,19 @@ public class Process_Combination_Game_Manager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space)){
             Combination_Button();
         }
+    }
+
+    public void ListRemove_ToObject()
+    {
+        for (int i = 0; i < data.Count; i++)
+        {
+            Destroy(data[i]);
+            Destroy(Note_List[i]);
+            Destroy(Button_List[i]);
+        }
+
+        data.Clear();
+        Button_List.Clear();
+        Note_List.Clear();
     }
 }

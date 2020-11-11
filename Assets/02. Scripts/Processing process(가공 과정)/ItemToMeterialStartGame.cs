@@ -7,11 +7,11 @@ using UnityEngine.UI;
 public class ItemToMeterialStartGame : MonoBehaviour
 {
     Color blue = new Color(0f, 0f, 1f, 0.75f);
+    Color red = new Color(1f, 0f, 0f, 0.75f);
 
     int check;
 
     public GameObject Combination_Button;
-    public GameObject Process_Combination_Game_Ob;
 
     public GameObject Item_Contant;
     public GameObject Meterial_Contant;
@@ -26,8 +26,10 @@ public class ItemToMeterialStartGame : MonoBehaviour
         Combination_Button.SetActive(false);
         check = 0;
 
-        for (int i = 0; i < Enums.Item_Len; i++) { Item_Contant.transform.GetChild(i).gameObject.SetActive(false); }
-        for (int i = 0; i < Enums.Meterial_Len; i++) { Meterial_Contant.transform.GetChild(i).gameObject.SetActive(false); }
+        for (int i = 0; i < Enums.Meterial_Len; i++) {
+            Meterial_Contant.transform.GetChild(i).gameObject.SetActive(false);
+            Meterial_Contant.transform.GetChild(i).GetComponent<Image>().color = red;
+        }
 
         switch (Sc.process_Menu_Manager.Item_Data.Item_Name)
         {
@@ -72,9 +74,9 @@ public class ItemToMeterialStartGame : MonoBehaviour
     {
         for (int i = 0; i < Enums.Item_Len; i++)
         {
-            if (Item_name == Item_Contant.transform.GetChild(i).gameObject.name)
+            if (Item_name == Sc.enums.Item_name_string[i])
             {
-                Item_Contant.transform.GetChild(i).gameObject.SetActive(true);
+                Item_Contant.transform.GetComponent<Image>().sprite = Sc.enums.Item_Image_Ob[i];
                 break;
             }
         }
@@ -106,6 +108,6 @@ public class ItemToMeterialStartGame : MonoBehaviour
     {
         Sc.fadeInFadeOut.FadeFuntion();
         Sc.process_Menu_Manager.Item_Meterial_Manager.SetActive(false);
-        Process_Combination_Game_Ob.SetActive(true);
+        Sc.Process_Combination_Game_Ob.SetActive(true);
     }
 }
