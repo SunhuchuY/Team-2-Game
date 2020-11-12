@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class Item_OnMouse : MonoBehaviour
 {
+    public int itemIndex;
+
     public void On()
     {
-        print("내일 개발할꺼임, 아이템 정보띄움");    
+        Sc.stock_Manager.ItemNameCall_Funtion(gameObject);
     }
 
     public void Exit()
     {
-        print("아이템 정보띄우기 종료");
+        Sc.stock_Manager.ItemNameExit_Funtion();
     }
 }

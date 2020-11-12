@@ -6,14 +6,17 @@ using UnityEngine;
 public class Enums : MonoBehaviour
 {
     public string[] Item_name_string = { "Emerald_ring" , "Diamond_ring", "Ruby_ring", "Saphire_ring" };
+    public string[] Item_Korean_name_string = { "에메랄드 반지", "다이아 반지", "루비 반지", "사파이어 반지" };
     public string[] Meterial_name_string = { "Emerald", "Iron", "Ruby", "Diamond", "Saphire" };
+    public string[] Meterial_Korean_name_string = { "에메랄드", "철", "루비", "다이아", "사파이어" };
 
     static public int Item_Len = Enum.GetNames(typeof(Item_Name_List)).Length;
     static public int Meterial_Len = Enum.GetNames(typeof(Item_Meterial_List)).Length;
 
     // 아이템 enum에 명시 된 순서대로 저장한다(위의 스트링값도 아이템 enum순서이니까 참조가능)
     public int[] Item_countSort = new int[Item_Len];
-    public Sprite[] Item_Image_Ob = new Sprite[Item_Len];
+    public Sprite[] Item_sprite = new Sprite[Item_Len];
+    public string[] Item_explanString = new string[Item_Len];
 }
 
 enum Timing_State

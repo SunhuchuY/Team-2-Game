@@ -76,7 +76,7 @@ public class ItemToMeterialStartGame : MonoBehaviour
         {
             if (Item_name == Sc.enums.Item_name_string[i])
             {
-                Item_Contant.transform.GetComponent<Image>().sprite = Sc.enums.Item_Image_Ob[i];
+                Item_Contant.transform.GetComponent<Image>().sprite = Sc.enums.Item_sprite[i];
                 break;
             }
         }
