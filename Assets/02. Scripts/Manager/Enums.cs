@@ -14,9 +14,15 @@ public class Enums : MonoBehaviour
     static public int Meterial_Len = Enum.GetNames(typeof(Item_Meterial_List)).Length;
 
     // 아이템 enum에 명시 된 순서대로 저장한다(위의 스트링값도 아이템 enum순서이니까 참조가능)
-    public int[] Item_countSort = new int[Item_Len];
+    public int[] Item_countSort = new int[Item_Len];  // 현재 만든 아이템 보관용도
+    public int[] Item_Price = new int[Item_Len];  // 현재 만든 아이템 보관용도
     public Sprite[] Item_sprite = new Sprite[Item_Len];
     public string[] Item_explanString = new string[Item_Len];
+
+    public int[] Meterial_countSort = new int[Item_Len];  // 현재 만든 아이템 보관용도
+    public int[] Meterial_Price = new int[Item_Len];  // 현재 만든 아이템 보관용도
+    public Sprite[] Meterial_sprite = new Sprite[Item_Len];
+    public string[] Meterial_explanString = new string[Item_Len];
 }
 
 enum Timing_State

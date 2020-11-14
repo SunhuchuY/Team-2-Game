@@ -31,6 +31,10 @@ public class Sc : MonoBehaviour
     static public Stock_Manager stock_Manager;
     public C_Manager p_c_Manager;
     static public C_Manager c_Manager;
+    public PickBox_Manager p_pickBox_Manager;
+    static public PickBox_Manager pickBox_Manager;
+    public C_Order_Delivery_Manager p_C_Order_Delivery_Manager;
+    static public C_Order_Delivery_Manager C_Order_Delivery_Manager;
 
     private void Awake()
     {
@@ -48,5 +52,7 @@ public class Sc : MonoBehaviour
 
         stock_Manager = p_stock_Manager;
         c_Manager = p_c_Manager;
+        pickBox_Manager = p_pickBox_Manager;
+        C_Order_Delivery_Manager = p_C_Order_Delivery_Manager;
     }
 }

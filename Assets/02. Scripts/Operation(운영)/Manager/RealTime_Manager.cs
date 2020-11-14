@@ -58,9 +58,13 @@ public class RealTime_Manager : MonoBehaviour
 
     void C_timeCheck()
     {
-        if(AM && h == 11)
+        if (AM && h == 11) // 주문형 손님 오는시간
         {
             Sc.c_Manager.C_arriveOrder();
+        }
+        else if (!AM && h == 5 && Sc.pickBox_Manager.goldSum > 0) // 주문형 손님때 구매한 택배 오는시간
+        {
+            Sc.c_Manager.C_Order_Delivery();
         }
     }
 }
