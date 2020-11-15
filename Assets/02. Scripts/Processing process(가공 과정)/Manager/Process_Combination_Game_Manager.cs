@@ -18,7 +18,11 @@ public class Process_Combination_Game_Manager : MonoBehaviour
     List<Rythem_Data> data = new List<Rythem_Data>();
     public Combination_Game_Data combination_Game_Data;
 
-    int pickIndex, inIndex, outIndex, Score = 0;
+    int pickIndex, inIndex, outIndex, Score = 0, All_noteNum; 
+    // 올_노트넘은 노트의 콜라이더 체크<CombinationNote_ColCheck> 스크립트
+    //가 시작할시에 호출되고 총 노드 양이다.
+
+    public void noteNumPlus() { All_noteNum++; }
 
     private void OnEnable()
     {
@@ -52,7 +56,7 @@ public class Process_Combination_Game_Manager : MonoBehaviour
         }
 
         string use_Item_dataName = Sc.enums.Item_name_string[(int)Sc.process_Menu_Manager.Item_Data.Item_Name];
-        inIndex = 0; outIndex = 0; Score = 0;
+        inIndex = 0; outIndex = 0; Score = 0; All_noteNum = 0;
         Score_Text_Update();
 
         for (int i = 0; i < combination_Game_Data.Combination_Data.Length; i++)
@@ -72,11 +76,14 @@ public class Process_Combination_Game_Manager : MonoBehaviour
         if (combination_Game_Data.Combination_Data[pickIndex].Line[outIndex].LoopOfnum <= ++inIndex)
         {
             if (++outIndex == combination_Game_Data.Combination_Data[pickIndex].Line.Length)
-            {
+            { // 결합의 노트끝, 완성이 되었다는 부분, 등급 판정
                 Sc.fadeInFadeOut.FadeFuntion();
                 Sc.Process_Combination_Game_Ob.SetActive(false);
                 Sc.Operation_Menu.SetActive(true);
-                Sc.enums.Item_countSort[(int)Sc.process_Menu_Manager.Item_Data.Item_Name]++;
+
+                print((double)Score / (double)All_noteNum);
+                Sc.enums.Item_countSort_Plus((int)Sc.process_Menu_Manager.Item_Data.Item_Name, Sc.enums.RankToStr_System((double)Score / (double)All_noteNum));
+
                 return;
             }
             else

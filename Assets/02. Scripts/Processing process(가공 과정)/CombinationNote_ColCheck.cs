@@ -10,6 +10,7 @@ public class CombinationNote_ColCheck : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D col)
     {
         isCheck = false;
+        Sc.process_Combination_Game_Manager.noteNumPlus();
     }
 
     private void OnTriggerStay2D(Collider2D col)

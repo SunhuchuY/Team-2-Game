@@ -11,7 +11,7 @@ public class Main_Data : MonoBehaviour
 
     static public GameObject Now_C;
     static public int Gold = 50000;
-    static public int Shop_repu = 4;
+    static public float Shop_repu = 4;
 
     private void Update()
     {

@@ -36,7 +36,7 @@ public class C_Order_Delivery_Manager : MonoBehaviour
                     temp.transform.GetChild(0).GetComponent<Text>().text = $"{koreanStr} x {Script.deliveryNum}"; // 텍스트위치임
 
                     if (Script.isItem)
-                        Sc.enums.Item_countSort[Script.Korean_stringIndex] += Script.deliveryNum;
+                        Sc.enums.Item_countSort_Plus(Script.Korean_stringIndex, "S", Script.deliveryNum);
                     else
                         Sc.enums.Meterial_countSort[Script.Korean_stringIndex] += Script.deliveryNum;
 

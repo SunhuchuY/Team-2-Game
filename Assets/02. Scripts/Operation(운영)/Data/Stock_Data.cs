@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Stock_Data : MonoBehaviour
 {
-    public GameObject prefab;
+    /*public GameObject prefab;
     int numOfData = 0;
 
     private void OnEnable()
@@ -27,5 +27,5 @@ public class Stock_Data : MonoBehaviour
                 numOfData++;
             }
         }
-    }
+    }*/
 }

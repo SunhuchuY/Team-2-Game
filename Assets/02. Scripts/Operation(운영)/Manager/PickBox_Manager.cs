@@ -27,8 +27,12 @@ public class PickBox_Manager : MonoBehaviour
 
     public void Order_Submit_Button() // 주문에 대해서 제출
     {
-        Main_Data.Gold -= goldSum;
-
+        if(Main_Data.Gold > goldSum)
+            Main_Data.Gold -= goldSum;
+        else
+        {
+            return;
+        }
         Sc.c_Manager.C_order_Manager_Ob.SetActive(false);
 
         Main_Data.Now_C_Quit();

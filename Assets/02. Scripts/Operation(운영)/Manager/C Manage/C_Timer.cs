@@ -12,6 +12,14 @@ public class C_Timer : MonoBehaviour
     public Image timerImage;
     public float timer = -1f;
 
+    private void OnEnable()
+    {
+        if(timer > 0)
+        {
+            StartCoroutine(Timer()); // 만들기, 손님과 대화중의 경우를 위함.
+        }
+    }
+
     public void StartTimer()
     {
         timer = 30f;

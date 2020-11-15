@@ -8,7 +8,7 @@ using UnityEngine.UIElements;
 
 public class Process_Game_Manager : MonoBehaviour
 {
-    int LoopOfnum; public int Score; public Text LoopOfnum_text, Count_Text, Score_Text;
+    int LoopOfnum; public int Score, noteNum; public Text LoopOfnum_text, Count_Text, Score_Text;
     public GameObject TimingBar_Ob;
     public GameObject rest, interval, Temp_Parent; // 쉼표, 음정, 이 둘을 보관할 임시 저장 부모 오브젝트
     GameObject[] Temp = new GameObject[0];
@@ -20,7 +20,7 @@ public class Process_Game_Manager : MonoBehaviour
         TimingBar_Ob.SetActive(false);
 
         LoopOfnum = Sc.process_Menu_Manager.rythem_Data.LoopOfnum;
-        Score = 0;
+        Score = 0; noteNum = 0;
         LoopOfnum_Text_Update();
         Score_Text_Update(0);
         Temp_Remove();

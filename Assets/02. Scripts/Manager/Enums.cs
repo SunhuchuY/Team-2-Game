@@ -14,15 +14,70 @@ public class Enums : MonoBehaviour
     static public int Meterial_Len = Enum.GetNames(typeof(Item_Meterial_List)).Length;
 
     // 아이템 enum에 명시 된 순서대로 저장한다(위의 스트링값도 아이템 enum순서이니까 참조가능)
-    public int[] Item_countSort = new int[Item_Len];  // 현재 만든 아이템 보관용도
+    public Meterial_countSort[] Item_countSort = new Meterial_countSort[Item_Len];  // 현재 만든 아이템 보관용도
     public int[] Item_Price = new int[Item_Len];  // 현재 만든 아이템 보관용도
     public Sprite[] Item_sprite = new Sprite[Item_Len];
     public string[] Item_explanString = new string[Item_Len];
 
-    public int[] Meterial_countSort = new int[Item_Len];  // 현재 만든 아이템 보관용도
-    public int[] Meterial_Price = new int[Item_Len];  // 현재 만든 아이템 보관용도
-    public Sprite[] Meterial_sprite = new Sprite[Item_Len];
-    public string[] Meterial_explanString = new string[Item_Len];
+    /// <summary>
+    /// ///////////////////////
+    /// </summary>
+
+    public int[] Meterial_countSort = new int[Meterial_Len];  // 현재 만든 아이템 보관용도
+    public int[] Meterial_Price = new int[Meterial_Len];  // 현재 만든 아이템 보관용도
+    public Sprite[] Meterial_sprite = new Sprite[Meterial_Len];
+    public string[] Meterial_explanString = new string[Meterial_Len];
+
+    public string RankToStr_System(double Calculation)
+    {
+        if (Calculation == 1)
+            return "S";
+        else if (Calculation >= 0.95 && Calculation <= 0.99)
+            return "A";
+        else if (Calculation >= 0.8 && Calculation <= 0.94)
+            return "B";
+        else if (Calculation >= 0.5 && Calculation <= 0.79)
+            return "C";
+        else if (Calculation >= 0.3 && Calculation <= 0.49)
+            return "D";
+
+        return "F"; // 다 안나올경우 최악 F 판정
+    }
+
+    public string RankToInt_System(double Calculation)
+    {
+        if (Calculation == 1)
+            return "S";
+        else if (Calculation >= 0.95 && Calculation <= 0.99)
+            return "A";
+        else if (Calculation >= 0.8 && Calculation <= 0.94)
+            return "B";
+        else if (Calculation >= 0.5 && Calculation <= 0.79)
+            return "C";
+        else if (Calculation >= 0.3 && Calculation <= 0.49)
+            return "D";
+
+        return "F"; // 다 안나올경우 최악 F 판정
+    }
+
+    public void Item_countSort_Plus(int index, string ToRank, int Plus = 1)
+    {
+        int len = Item_countSort[index].Rank.Length;
+
+        Item_countSort[index].Rank = new string[len + Plus];
+
+        for (int i = 0; i < Plus; i++)
+        {
+            Item_countSort[index].Rank[len] = ToRank;
+            len++;
+        }
+    }
+}
+
+[System.Serializable]
+public class Meterial_countSort
+{
+    public string[] Rank;
 }
 
 enum Timing_State

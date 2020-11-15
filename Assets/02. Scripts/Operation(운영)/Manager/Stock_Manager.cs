@@ -3,12 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
-using UnityEngine.UIElements;
 
 public class Stock_Manager : MonoBehaviour
 {
     const int maxC = 5;
     const float speedC = 0.7f;
+
+    public float Height;
+
+    int numOfData = 0;
+
+    public GameObject prefab;
+    public Transform Contants;
 
     // Mouse On > Item Name Call
     [SerializeField] GameObject ItemName_Ob;
@@ -16,8 +22,36 @@ public class Stock_Manager : MonoBehaviour
 
     // Explan
     [SerializeField] GameObject Explan_Ob;
+    [SerializeField] Image Explan_Image;
     [SerializeField] Text Explan_Text;
-    [SerializeField] Text Explan_itemName_Text;
+    [SerializeField] Text Explan_nameText;
+    [SerializeField] Text Explan_numText;
+
+
+    private void OnEnable()
+    {
+        for (int i = 0; i < numOfData; i++)
+        {
+            Destroy(Contants.GetChild(i).GetChild(0).gameObject);
+        }
+
+        numOfData = 0;
+
+        for (int i = 0; i < Sc.enums.Item_countSort.Length; i++)
+        {
+            for (int j = 0; j < Sc.enums.Item_countSort[i].Rank.Length; j++)
+            {
+                Transform tempParent = Contants.GetChild(numOfData);
+
+                GameObject Temp = Instantiate(prefab, tempParent);
+                Temp.GetComponent<Image>().sprite = Sc.enums.Item_sprite[i];
+                Temp.GetComponent<Item_OnMouse>().itemIndex = i;
+                Temp.GetComponent<Item_OnMouse>().rankIndex = j;
+                numOfData++;
+            }
+        }
+    }
+
 
     // 마우스 올릴시 아이템 이름 띄우기
     public void ItemNameCall_Funtion(GameObject you)
@@ -26,8 +60,7 @@ public class Stock_Manager : MonoBehaviour
 
         ItemName_Text.text = Sc.enums.Item_Korean_name_string[temp];
 
-        ItemName_Ob.transform.SetParent(you.transform.parent);
-        ItemName_Ob.transform.localPosition = new Vector2(you.transform.parent.position.x < 800 ? 100 : -100, 0);
+        ItemName_Ob.transform.position = new Vector2(you.transform.position.x, you.transform.position.y + Height);
         ItemName_Ob.SetActive(true);
     }
 
@@ -38,14 +71,13 @@ public class Stock_Manager : MonoBehaviour
     // 아이템 설명 창 띄우기
     public void ExplanCall_Funtion(GameObject you)
     {
-        int temp = you.GetComponent<Item_OnMouse>().itemIndex;
+        Item_OnMouse tempScript = you.GetComponent<Item_OnMouse>();
 
-        Explan_itemName_Text.text = Sc.enums.Item_Korean_name_string[temp];
-        Explan_Text.text = Sc.enums.Item_explanString[temp];
+        Explan_Image.sprite = you.GetComponent<Image>().sprite;
+        Explan_nameText.text = Sc.enums.Item_Korean_name_string[tempScript.itemIndex];
+        Explan_Text.text = Sc.enums.Item_explanString[tempScript.itemIndex];
+        Explan_numText.text = $"{Sc.enums.Item_countSort[tempScript.itemIndex].Rank[tempScript.rankIndex]}";
 
-        // 800보다 작다면 오른쪽으로 띄우고 / 크다면 왼쪽으로
-        Explan_Ob.transform.SetParent(you.transform.parent);
-        Explan_Ob.transform.localPosition = new Vector2(you.transform.parent.position.x < 800 ? 100 : -100, 0);
         Explan_Ob.SetActive(true);
     }
 
