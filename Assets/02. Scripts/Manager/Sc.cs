@@ -35,6 +35,11 @@ public class Sc : MonoBehaviour
     static public PickBox_Manager pickBox_Manager;
     public C_Order_Delivery_Manager p_C_Order_Delivery_Manager;
     static public C_Order_Delivery_Manager C_Order_Delivery_Manager;
+    public Request_Manager p_request_Manager;
+    static public Request_Manager request_Manager;
+    public RealTime_Manager p_realTime_Manager;
+    static public RealTime_Manager realTime_Manager;
+
 
     private void Awake()
     {
