@@ -23,13 +23,15 @@ public class RealTime_Manager : MonoBehaviour
     {
         // 1초마다 조건검사
         yield return new WaitForSeconds(1f);
+        C_Appear_Check();
 
         // 리얼타임(실제시간) 5초가 게임의 10분이므로 텍스트 업데이트
         if (i >= textUpdate_Time)
         {
             i = 0;
             m += 10;
-            if(m >= 60)
+            Sc.request_Manager.leftTime_Check();
+            if (m >= 60)
             {
                 h++; m = 0;
                 C_timeCheck();
@@ -93,19 +95,14 @@ public class RealTime_Manager : MonoBehaviour
     void C_Appear_Check() // 1초마다 식을 통해 손님이 올지 결정한다.
     {
         int index;
-        float rand = Random.Range(0f, 0.1f);
+        float rand = Random.Range(0f, 0.9f);
         float tempAppear = 0.01f + (Main_Data.Shop_repu / 100) + Time_Value;
         
         if(tempAppear >= rand) // 등장
         {
             // 일단은 손님유형이 하나밖에 없으므로 의뢰형만 출연
 
-            index = Sc.request_Manager.isEmpty_ToIndex();
-            if(index != -1) // 비었으므로 등장
-            {
-                print("a");
-                Sc.c_Manager.C_arriveRequest();
-            }
+            Sc.c_Manager.C_arriveRequest();
         }
 
         return;

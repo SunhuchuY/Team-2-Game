@@ -14,6 +14,7 @@ public class C_Manager : MonoBehaviour
     // 손님 관리 시스템
     int C = -1;
     List<GameObject> C_queue = new List<GameObject>();
+    bool[] C_queue_bool = new bool[5];
     [SerializeField] Transform[] C_endPosition = new Transform[maxC]; // 최대로 올수 있는 손님의 수가 5명임
     [SerializeField] Transform[] C_startPosition = new Transform[maxC]; // 최대로 올수 있는 손님의 수가 5명임
 
@@ -33,12 +34,11 @@ public class C_Manager : MonoBehaviour
     // 매니저 오브젝트 ,기본, 회수, 성공, 실패
     public GameObject C_Request_Manager_Ob, C_Request_Basic_Ob, C_Request_Magnification_Ob, C_Request_Success_Ob, C_Request_failure_Ob;
     public GameObject C_Request_Prefab, C_Request_informationText_Contants;
-
+    public Image C_Request_cImage;
 
 
     private void Start()
     {
-
         // 재료모두 생성
         for (int i = 0; i < Enums.Meterial_Len; i++)
         {
@@ -69,34 +69,64 @@ public class C_Manager : MonoBehaviour
 
         for (int i = 0; i < C_Request_informationText.Length; i++)
         {
-            C_Request_informationText[i] = C_Request_informationText_Contants.transform.GetChild(i).GetComponent<Text>();
+            C_Request_informationText[i] = C_Request_informationText_Contants.transform.GetChild(i).GetChild(0).GetComponent<Text>();
         }
     }
 
     // 손님 관리 시스템
-    IEnumerator C_Join(C_Type c) // 손님이 들어올때의 연출과 자리 배치
+    IEnumerator C_Join(C_Type c, GameObject temps = null) // 손님이 들어올때의 연출과 자리 배치
     {
-        if (C_queue.Count >= 5) yield break;
+        if (C_queue.Count >= 5)
+        {
+            if(c == C_Type.C_Request_collection) // 회수하러 왔다면
+            {
+                while(C_queue.Count >= 5)
+                {
+                    yield return new WaitForSeconds(1f);
+                }
+            }
+            else
+            {
+                yield break;
+            }
+        }
 
-        GameObject temp = null;
+        GameObject temp = temps;
 
         switch (c)
         {
             case C_Type.C_Order:
                 temp = Instantiate(C_Order_prefab, C_Contants);
+                temp.name = $"OC{C_queue.Count - 1}";
                 break;
             case C_Type.C_Request:
                 temp = Instantiate(C_Request_Prefab, C_Contants);
+                temp.name = $"RC{C_queue.Count - 1}";
                 break;
         }
 
         C_queue.Add(temp);
 
         // 이동 연출
-        temp.transform.position = C_startPosition[C_queue.Count - 1].position;
-        yield return temp.transform.DOMove(C_endPosition[C_queue.Count - 1].position, speedC).WaitForCompletion();
+        int index = 0;
+        for (int i = 0; i < C_queue_bool.Length; i++)
+        {
+            if (!C_queue_bool[i])
+            {
+                if(c != C_Type.C_Request_collection)
+                    temp.GetComponent<C_Timer>().C_queue_bool_index = i;
 
-        temp.GetComponent<C_Timer>().StartTimer(30f); // 게임상으론 1시간임.
+                C_queue_bool[i] = true;
+                index = i;
+                break;
+            }
+        }
+
+        temp.transform.position = C_startPosition[index].position;
+        yield return temp.transform.DOMove(C_endPosition[index].position, speedC).WaitForCompletion();
+
+        if (c != C_Type.C_Request_collection)
+            temp.GetComponent<C_Timer>().StartTimer(30f); // 게임상으론 1시간임.
     }
 
     public void C_Quit(GameObject ob)
@@ -105,6 +135,7 @@ public class C_Manager : MonoBehaviour
         {
             if (C_queue[i].name == ob.name)
             {
+                C_queue_bool[C_queue[i].GetComponent<C_Timer>().C_queue_bool_index] = false;
                 Destroy(C_queue[i]);
                 C_queue.RemoveAt(i);
             }
@@ -231,7 +262,7 @@ public class C_Manager : MonoBehaviour
         }
 
         if (rankRand >= 0 && rankRand <= rankRand_toArr[0])
-            return "NOT";
+            return "무등";
         else if (rankRand > rankRand_toArr[0] && rankRand <= rankRand_toArr[1])
             return "D";
         else if (rankRand > rankRand_toArr[1] && rankRand <= rankRand_toArr[2])
@@ -243,26 +274,52 @@ public class C_Manager : MonoBehaviour
         else if (rankRand > rankRand_toArr[4] && rankRand <= rankRand_toArr[5])
             return "S";
 
-        return "무등급";
+        return "무등";
     }
 
+
+    Request_List request_List;
     public void C_Request_Button(Request_List tempScript) // 해당 의뢰 버튼을 눌렀을시 시작되는 함수
     {
+        request_List = tempScript;
+
+        C_Request_Manager_Ob.SetActive(true);
+        C_Request_Basic_Ob.SetActive(true);
+
         C_Request_CnameText.text = tempScript.C_name;
+        C_Request_cImage.sprite = tempScript.C_image;
         C_Request_explanText.text = $"{Sc.enums.Item_Korean_name_string[tempScript.itemIndex]}({tempScript.rank})을(를) " +
             $"제작 해주셨으면 합니다. {tempScript.day}일 {tempScript.h}시간 뒤에 재방문 합니다. 가능할까요?";
 
-        C_Request_informationText[0].text = $"{Sc.enums.Item_Korean_name_string[tempScript.itemIndex]}({tempScript.rank})"; // 제품의 정보
+        C_Request_informationText[0].text = $"{Sc.enums.Item_Korean_name_string[tempScript.itemIndex]}({tempScript.rank}급 이상)"; // 제품의 정보
         C_Request_informationText[1].text = $"{tempScript.day}일 {tempScript.h}시간 뒤 재방문"; // 다음 방문 일시
-        C_Request_informationText[2].text = $"{tempScript.retainingMoney}G"; // 착수금
-        C_Request_informationText[3].text = $"{tempScript.keyMoney}G"; // 완수금
+        C_Request_informationText[2].text = $"착수금({tempScript.retainingMoney}G)"; // 착수금
+        C_Request_informationText[3].text = $"완수금({tempScript.keyMoney}G)"; // 완수금
 
-        C_Request_slotText.text = $"수락({Sc.request_Manager.numOfData}/3)";
+        C_Request_slotText.text = $"수락({Sc.request_Manager.isSize()}/3)";
+    }
+
+    public void C_Request_accept_Button() // 수락 버튼
+    {
+        C_Quit(request_List.gameObject);
+        Sc.request_Manager.ToIndex_Request_Append(request_List);
+        C_Request_ExitButton();
+    }
+
+    public void C_Request_ExitButton()
+    {
+        C_Request_Manager_Ob.SetActive(false);
+        C_Request_Basic_Ob.SetActive(false);
     }
 
     public void C_arriveRequest()
     {
         StartCoroutine(C_Join(C_Type.C_Request));
+    }
+
+    public void C_Request_Collection_Join(GameObject ob)
+    {
+        StartCoroutine(C_Join(C_Type.C_Request_collection, ob));
     }
 }
 [System.Serializable]

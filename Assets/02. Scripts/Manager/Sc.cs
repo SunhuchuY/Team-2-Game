@@ -59,5 +59,7 @@ public class Sc : MonoBehaviour
         c_Manager = p_c_Manager;
         pickBox_Manager = p_pickBox_Manager;
         C_Order_Delivery_Manager = p_C_Order_Delivery_Manager;
+        request_Manager = p_request_Manager;
+        realTime_Manager = p_realTime_Manager;
     }
 }

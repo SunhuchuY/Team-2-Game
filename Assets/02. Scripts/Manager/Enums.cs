@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 public class Enums : MonoBehaviour
@@ -31,7 +32,7 @@ public class Enums : MonoBehaviour
     public Sprite[] Meterial_sprite = new Sprite[Meterial_Len];
     public string[] Meterial_explanString = new string[Meterial_Len];
 
-    public string[] C_Name;
+    public C_Data[] C_Datas;
 
     public string RankToStr_System(double Calculation)
     {
@@ -79,9 +80,9 @@ public class Enums : MonoBehaviour
     }
 
     // 랜덤 이름을 정해주는 함수.
-    public string Random_C_nameReturn()
+    public C_Data Random_C_DataReturn()
     {
-        return C_Name[Random.Range(0, C_Name.Length)];
+        return C_Datas[Random.Range(0, C_Datas.Length)];
     }
 
 }
@@ -98,6 +99,14 @@ public class Temp_itemData
     public int Meterial_sumPrice;
     public Item_Name_List itemName;
     public Item_Meterial_List[] Item_meterialList;
+}
+
+[System.Serializable]
+
+public class C_Data
+{
+    public string C_name;
+    public Sprite C_image;
 }
 
 enum Timing_State
@@ -141,7 +150,7 @@ public enum RightAndLeft{
 public enum C_Type
 {
     C_Order, // 주문형
-    C_Request // 의뢰형
-
+    C_Request, // 의뢰형
+    C_Request_collection // 의뢰 - 회수형
 };
 

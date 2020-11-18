@@ -6,6 +6,7 @@ using DG.Tweening;
 
 public class C_Timer : MonoBehaviour
 {
+    public int C_queue_bool_index;
     const float fillmountMax = 0.035f, ordeManager_Ob_trueSpeed = 1.5f;
     public Ease ordeManager_Ob_trueEase;
 
