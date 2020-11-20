@@ -51,6 +51,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c70948b361540204989802ef58d66467, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  C_queue_bool_index: 0
   ordeManager_Ob_trueEase: 3
   timerImage: {fileID: 762342786711911072}
   timer: -1
@@ -73,6 +74,7 @@ MonoBehaviour:
   rand_Request_Magnification: 0
   rank: 
   C_name: 
+  C_image: {fileID: 0}
   day: 0
   h: 0
   m: 0

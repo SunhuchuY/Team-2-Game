@@ -35,7 +35,7 @@ public class PickBox_Manager : MonoBehaviour
         }
         Sc.c_Manager.C_order_Manager_Ob.SetActive(false);
 
-        Main_Data.Now_C_Quit();
+        Sc.c_Manager.C_Quit("OC"); // 어짜피 OC라는 이름은 주문형 손님이 들어갈때만 발생함 > 따라서 OC로 결정
     }
 
     public void PickData_Submit_Button() // 현재 선택한 아이템 및 재료에 대해서 제출

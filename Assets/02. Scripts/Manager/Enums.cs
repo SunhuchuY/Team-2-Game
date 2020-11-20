@@ -50,32 +50,77 @@ public class Enums : MonoBehaviour
         return "F"; // 다 안나올경우 최악 F 판정
     }
 
-    public string RankToInt_System(double Calculation)
+    public int RankToInt_System(string Rank)
     {
-        if (Calculation == 1)
-            return "S";
-        else if (Calculation >= 0.95 && Calculation <= 0.99)
-            return "A";
-        else if (Calculation >= 0.8 && Calculation <= 0.94)
-            return "B";
-        else if (Calculation >= 0.5 && Calculation <= 0.79)
-            return "C";
-        else if (Calculation >= 0.3 && Calculation <= 0.49)
-            return "D";
+        if (Rank == "S")
+            return 6;
+        else if (Rank == "A")
+            return 5;
+        else if (Rank == "B")
+            return 4;
+        else if (Rank == "C")
+            return 3;
+        else if (Rank == "D")
+            return 2;
 
-        return "F"; // 다 안나올경우 최악 F 판정
+        return 1; // 다 안나올경우 최악 F 판정
     }
 
     public void Item_countSort_Plus(int index, string ToRank, int Plus = 1)
     {
         int len = Item_countSort[index].Rank.Length;
-
         Item_countSort[index].Rank = new string[len + Plus];
 
         for (int i = 0; i < Plus; i++)
         {
             Item_countSort[index].Rank[len] = ToRank;
             len++;
+        }
+    }
+
+    // 해당 아이템에 랭크가 있을때만 사용을 권함
+    public void Item_countSort_Data_Remove(int itemIndex, string RemoveRank) // 해당 아이템의 특정 랭크를 가진 데이터를 삭제
+    {
+        // 조금 비효율적이지만 옆으로 한칸씩 이동하는 방식을 씀, 지워야 할 데이터 조건 탐색 후 한칸씩 옆으로 옮긴후 배열 길이를 줄임
+
+        /*for (int i = 0; i < Item_countSort[itemIndex].Rank.Length; i++)
+        {
+            if (Item_countSort[itemIndex].Rank[i] == RemoveRank)
+            {
+                for (int j = i + 1; j < Item_countSort[itemIndex].Rank.Length; j++)
+                {
+                    string tempRank = Item_countSort[itemIndex].Rank[j];
+                    Item_countSort[itemIndex].Rank[j - 1] = tempRank;
+                    print($"{tempRank} {Item_countSort[itemIndex].Rank[j - 1]}");
+                }
+                break;
+            }
+        }*/
+
+
+        // 데이터를 복사 후 옮김
+        Stack<string> tempRank = new Stack<string>();
+
+        for (int i = 0; i < Item_countSort[itemIndex].Rank.Length; i++)
+        {
+            if (Item_countSort[itemIndex].Rank[i] == RemoveRank)
+            {
+                for (int j = 0; j < Item_countSort[itemIndex].Rank.Length; j++)
+                {
+                    if (j != i)
+                    {
+                        tempRank.Push(Item_countSort[itemIndex].Rank[j]);
+                    }
+                }
+                break;
+            }
+        }
+
+        Item_countSort[itemIndex].Rank = new string[Item_countSort[itemIndex].Rank.Length - 1];
+
+        for (int i = 0; i <= tempRank.Count; i++)
+        {
+            Item_countSort[itemIndex].Rank[i] = tempRank.Pop();
         }
     }
 

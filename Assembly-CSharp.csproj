@@ -78,6 +78,7 @@
     <Compile Include="Assets\02. Scripts\Operation\Manager\LoweButton_Manager.cs" />
     <Compile Include="Assets\02. Scripts\Operation\Manager\PickBox_Manager.cs" />
     <Compile Include="Assets\02. Scripts\Operation\Manager\RealTime_Manager.cs" />
+    <Compile Include="Assets\02. Scripts\Operation\Manager\Request\Request_Collection.cs" />
     <Compile Include="Assets\02. Scripts\Operation\Manager\Request\Request_List.cs" />
     <Compile Include="Assets\02. Scripts\Operation\Manager\Request\Request_Manager.cs" />
     <Compile Include="Assets\02. Scripts\Operation\Manager\Request\Request_leftTimer.cs" />

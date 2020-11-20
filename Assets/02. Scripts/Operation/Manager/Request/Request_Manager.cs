@@ -90,6 +90,8 @@ public class Request_Manager : MonoBehaviour
 
         Request_Datas[index].rank = tempScript.rank;
 
+        Request_Datas[index].rand_Request_Magnification = tempScript.rand_Request_Magnification;
+
         Request_Datas[index].keyMoney = tempScript.keyMoney;
         Request_Datas[index].requestMoney = tempScript.requestMoney;
         Request_Datas[index].retainingMoney = tempScript.retainingMoney;
@@ -104,13 +106,18 @@ public class Request_Manager : MonoBehaviour
     {
         for (int i = 0; i < Request_Datas.Length; i++)
         {
-            if (Request_Datas[i].isEmpty != 0)
+            if (Request_Datas[i].isEmpty == 1)
             {
                 if (Request_Datas[i].day <= 0 && Request_Datas[i].h <= 0 && Request_Datas[i].m <= 0)
                 {
                     GameObject tempOb = Instantiate(C_Request_collection_Prefab, C_Request_collection_Parent.transform);
+                    tempOb.GetComponent<Request_Collection>().Request_Collection_Index = i;
                     tempOb.transform.position = new Vector2(3000, 0);
+                    tempOb.name = $"Collection{i}";
                     Sc.c_Manager.C_Request_Collection_Join(tempOb);
+                    Request_Datas[i].isEmpty = 2;
+
+                    continue;
                 }
 
                 if (Request_Datas[i].m <= 0)
@@ -128,6 +135,10 @@ public class Request_Manager : MonoBehaviour
                 Request_Datas[i].m -= 10;
                 box_Datas[i].left_Time.text = $"{Request_Datas[i].day}일 {Request_Datas[i].h}시 {Request_Datas[i].m}분 남음";
             }
+            else if(Request_Datas[i].isEmpty == 2)
+            {
+                box_Datas[i].left_Time.text = $"현재 방문중입니다.";
+            }
         }
     }
 }
@@ -135,10 +146,11 @@ public class Request_Manager : MonoBehaviour
 [System.Serializable]
 public class Request_Data
 {
-    public int isEmpty; // 0일시 비었다는 뜻
+    public int isEmpty; // 0일시 비었다는 뜻, 1일시 채워있는데 시간은 흘러간다는 뜻, 2일시 방문중이라는 뜻.
     public int day, h, m;
     public string rank, C_name;
     public int keyMoney, requestMoney,retainingMoney, itemIndex;
+    public float rand_Request_Magnification; // 배율
     public Sprite C_image;
 }
 

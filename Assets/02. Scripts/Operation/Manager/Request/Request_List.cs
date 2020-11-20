@@ -28,7 +28,8 @@ public class Request_List : MonoBehaviour
         Request_List tempScript = gameObject.GetComponent<Request_List>(); // 해당 인덱스 참조
 
         tempScript.itemIndex = Random.Range(0, Enums.Item_Len); // 아이템 랜덤 인덱스
-        tempScript.rand_Request_Magnification = Random.Range(1.0f, 5.0f); // 의뢰 배율
+        int tempRand1 = Random.Range(1, 5), tempRand2 = Random.Range(1, 10); //  소수점 1번째자리 랜덤
+        tempScript.rand_Request_Magnification = tempRand1 + (tempRand2 * 0.1f); // 의뢰 배율
 
         int sumPrice = 0, collectionPrice;
         for (int i = 0; i < Sc.enums.itemDatas[tempScript.itemIndex].Item_meterialList.Length; i++)

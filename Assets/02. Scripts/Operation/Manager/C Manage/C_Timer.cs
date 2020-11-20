@@ -40,7 +40,7 @@ public class C_Timer : MonoBehaviour
         }
         else
         {
-            Sc.c_Manager.C_Quit(gameObject);
+            Sc.c_Manager.C_Quit(gameObject.name);
         }
     }
 
@@ -49,7 +49,5 @@ public class C_Timer : MonoBehaviour
         Sc.c_Manager.C_order_Manager_Ob.transform.position = new Vector2(1940, 0);
         Sc.c_Manager.C_order_Manager_Ob.SetActive(true);
         Sc.c_Manager.C_order_Manager_Ob.transform.DOMove(Vector2.zero, ordeManager_Ob_trueSpeed).SetEase(ordeManager_Ob_trueEase);
-
-        Main_Data.Now_C_Init(gameObject);
     }
 }

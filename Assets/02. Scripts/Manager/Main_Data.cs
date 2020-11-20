@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 public class Main_Data : MonoBehaviour
 {
 
-    public Text moneyText;
+    public Text moneyText, Shop_repuText;
 
     static public GameObject Now_C;
     static public int Gold = 50000;
@@ -16,6 +16,7 @@ public class Main_Data : MonoBehaviour
     private void Update()
     {
         moneyText.text = $"{Gold}G";
+        Shop_repuText.text = $"{Shop_repu}";
     }
 
     static public void Now_C_Quit()
